@@ -25,6 +25,7 @@
 </template>
 <script>
 import { login } from '../assets/api/login'
+import router from '../router/index'
 export default {
   data () {
     return {
@@ -57,7 +58,7 @@ export default {
           const { data: res } = await login(this.ruleForm)
           // 通过状态码判断是否登录成功
           if (res.meta.status === 200) {
-            alert('登录成功')
+            router.push('/home')
           } else {
             alert('用户名密码不正确')
           }
@@ -73,6 +74,7 @@ export default {
 <style scoped>
     .login-container{
         height: 100%;
+        background-color: #2b4b6b;
     }
     .login-container .login-box{
         position: absolute;
