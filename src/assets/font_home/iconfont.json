@@ -1,0 +1,44 @@
+{
+  "id": "1496314",
+  "name": "v-shop",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "1305474",
+      "name": "权限",
+      "font_class": "quanxian",
+      "unicode": "e63f",
+      "unicode_decimal": 58943
+    },
+    {
+      "icon_id": "1391285",
+      "name": "商品管理",
+      "font_class": "shangpinguanli",
+      "unicode": "e608",
+      "unicode_decimal": 58888
+    },
+    {
+      "icon_id": "8605760",
+      "name": "用户管理",
+      "font_class": "yonghuguanli",
+      "unicode": "e667",
+      "unicode_decimal": 58983
+    },
+    {
+      "icon_id": "9826647",
+      "name": "数据统计",
+      "font_class": "shujutongji",
+      "unicode": "e610",
+      "unicode_decimal": 58896
+    },
+    {
+      "icon_id": "11125228",
+      "name": "订单",
+      "font_class": "6",
+      "unicode": "e61b",
+      "unicode_decimal": 58907
+    }
+  ]
+}

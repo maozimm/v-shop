@@ -4,10 +4,23 @@ import 'element-ui/lib/theme-chalk/index.css'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+import axios from 'axios'
 // 引入字体样式图标
 import './assets/fonts/iconfont.css'
 import './assets/css/glo-color.css'
+// 引入home图标
+import './assets/font_home/iconfont.css'
+// 引入home二级图标
+import './assets/font_second/iconfont.css'
 
+// 添加请求拦截器
+axios.interceptors.request.use(function (config) {
+  // 在发送请求之前做些什么
+  config.headers.Authorization = window.sessionStorage.getItem('token')
+  return config
+})
+Vue.prototype.$http = axios
+axios.defaults.baseURL = 'http://127.0.0.1:8888/api/private/v1'
 Vue.config.productionTip = false
 Vue.use(ElementUI)
 

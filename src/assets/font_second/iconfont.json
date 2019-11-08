@@ -1,0 +1,65 @@
+{
+  "id": "1496380",
+  "name": "二级图标",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "963804",
+      "name": "订单管理",
+      "font_class": "dingdanguanli",
+      "unicode": "e61a",
+      "unicode_decimal": 58906
+    },
+    {
+      "icon_id": "1221713",
+      "name": "商品分类",
+      "font_class": "shangpinfenlei",
+      "unicode": "e634",
+      "unicode_decimal": 58932
+    },
+    {
+      "icon_id": "3285903",
+      "name": "权限列表",
+      "font_class": "permissions-list",
+      "unicode": "e619",
+      "unicode_decimal": 58905
+    },
+    {
+      "icon_id": "4272328",
+      "name": "分类",
+      "font_class": "fenlei",
+      "unicode": "e682",
+      "unicode_decimal": 59010
+    },
+    {
+      "icon_id": "4329389",
+      "name": "商品列表",
+      "font_class": "shangpinliebiao",
+      "unicode": "e629",
+      "unicode_decimal": 58921
+    },
+    {
+      "icon_id": "6429675",
+      "name": "用户列表",
+      "font_class": "ico-",
+      "unicode": "e817",
+      "unicode_decimal": 59415
+    },
+    {
+      "icon_id": "7159322",
+      "name": "角色列表",
+      "font_class": "jiaoseliebiao",
+      "unicode": "e610",
+      "unicode_decimal": 58896
+    },
+    {
+      "icon_id": "8118860",
+      "name": "数据报表",
+      "font_class": "shujubaobiao",
+      "unicode": "e647",
+      "unicode_decimal": 58951
+    }
+  ]
+}
