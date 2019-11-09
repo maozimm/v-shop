@@ -106,7 +106,7 @@ export default {
   border-right: 0;
 }
 .container .el-main {
-  background-color: #fff;
+  background-color: #eaedf1;
 }
 i[class^='iconfont'] {
   margin-right: 10px;
