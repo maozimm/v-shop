@@ -40,7 +40,6 @@
           </el-table-column>
           <el-table-column label="操作">
             <template slot-scope="scope">
-              {{scope.row.id}}
               <el-button-group>
                 <div class="btn">
                   <el-button
@@ -48,14 +47,14 @@
                     icon="el-icon-edit"
                     size="mini"
                     @click="modifyformbtn(scope.row)"
-                  ></el-button>
+                  >修改</el-button>
                   <el-button
                     type="danger"
                     icon="el-icon-delete"
                     size="mini"
                     @click="deleteById(scope.row.id)"
-                  ></el-button>
-                  <el-button type="warning" icon="el-icon-share" size="mini"></el-button>
+                  >删除</el-button>
+                  <el-button type="warning" icon="el-icon-share" size="mini">分配角色</el-button>
                 </div>
               </el-button-group>
             </template>

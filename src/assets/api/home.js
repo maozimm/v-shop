@@ -21,10 +21,20 @@ const modifyuser = function (params, data) {
 const deleteUser = function (params) {
   return axios.delete('/users/' + params)
 }
+// 获取列表权限
+const rigthsList = function (params) {
+  return axios.get('/rights/' + params)
+}
+const getRolesList = function () {
+  return axios.get('/roles')
+}
+// 获取角色列表
 export {
   usersdata,
   statechange,
   adduser,
   modifyuser,
-  deleteUser
+  deleteUser,
+  rigthsList,
+  getRolesList
 }
