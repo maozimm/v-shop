@@ -25,10 +25,46 @@ const deleteUser = function (params) {
 const rigthsList = function (params) {
   return axios.get('/rights/' + params)
 }
+// 获取角色列表
 const getRolesList = function () {
   return axios.get('/roles')
 }
-// 获取角色列表
+// 删除角色权限
+const deleRolesPower = function (rolesId, powerId) {
+  return axios.delete(`roles/${rolesId}/rights/${powerId}`)
+}
+// 获取所有权限列表
+const allPower = function (type) {
+  return axios.get('/rights/' + type)
+}
+// 根据id获取角色
+const getRoleById = function (id) {
+  return axios.get('/roles/' + id)
+}
+// 分配权限按钮
+const setPowerbtn = function (id, str) {
+  return axios.post(`roles/${id}/rights`, {
+    rids: str
+  })
+}
+// 分配权限请求
+const putRoleReq = function (userid, roleid) {
+  return axios.put(`users/${userid}/role`, {
+    rid: roleid
+  })
+}
+// 添加角色
+const addRoleReq = function (params) {
+  return axios.post('/roles', params)
+}
+// 修改角色
+const modifyRoleReq = function (id, params) {
+  return axios.put('roles/' + id, params)
+}
+// 删除角色
+const deleteRoleReq = function (id) {
+  return axios.delete('/roles/' + id)
+}
 export {
   usersdata,
   statechange,
@@ -36,5 +72,13 @@ export {
   modifyuser,
   deleteUser,
   rigthsList,
-  getRolesList
+  getRolesList,
+  deleRolesPower,
+  allPower,
+  getRoleById,
+  setPowerbtn,
+  putRoleReq,
+  addRoleReq,
+  modifyRoleReq,
+  deleteRoleReq
 }

@@ -54,7 +54,12 @@
                     size="mini"
                     @click="deleteById(scope.row.id)"
                   >删除</el-button>
-                  <el-button type="warning" icon="el-icon-share" size="mini">分配角色</el-button>
+                  <el-button
+                    type="warning"
+                    icon="el-icon-share"
+                    size="mini"
+                    @click="setRole(scope.row)"
+                  >分配角色</el-button>
                 </div>
               </el-button-group>
             </template>
@@ -130,6 +135,28 @@
           </span>
         </el-dialog>
       </div>
+      <!-- 分配角色对话框 -->
+      <el-dialog title="分配角色" :visible.sync="dialogVisibleSetRole" width="40%">
+        <div>
+          <p>当前的用户：{{user_message.username}}</p>
+          <p>当前的角色：{{user_message.role_name}}</p>
+          <p>
+            分配新角色：
+            <el-select v-model="role_name" placeholder="请选择">
+              <el-option
+                v-for="item in rolelist"
+                :key="item.id"
+                :value="item.id"
+                :label="item.roleName"
+              ></el-option>
+            </el-select>
+          </p>
+        </div>
+        <span slot="footer" class="dialog-footer">
+          <el-button @click="dialogVisibleSetRole = false">取 消</el-button>
+          <el-button type="primary" @click="putRole">确 定</el-button>
+        </span>
+      </el-dialog>
     </el-card>
   </div>
 </template>
@@ -139,8 +166,9 @@ import {
   statechange,
   adduser,
   modifyuser,
-  deleteUser
-  // deleteUser
+  deleteUser,
+  getRolesList,
+  putRoleReq
 } from '../assets/api/home'
 export default {
   data() {
@@ -167,9 +195,14 @@ export default {
       total: null,
       current_page: null,
       page_size: null,
+      user_message: {},
       query: '',
       dialogVisible: false,
       dialogVisible_modify: false,
+      dialogVisibleSetRole: false,
+      role_value: '',
+      rolelist: [],
+      role_name: '',
       addForm: {
         username: '',
         password: '',
@@ -307,6 +340,21 @@ export default {
       } else {
         return this.$message.info('已取消删除')
       }
+    },
+    // 分配角色按钮
+    async setRole(data) {
+      this.dialogVisibleSetRole = true
+      this.user_message = data
+      const { data: res } = await getRolesList()
+      this.rolelist = res.data
+      this.role_name = this.user_message.role_name
+    },
+    // 分配角色框确认按钮
+    async putRole() {
+      this.dialogVisibleSetRole = false
+      await putRoleReq(this.user_message.id, this.role_name)
+      this.$message.success('分配角色成功')
+      this.getuer()
     }
   },
   async created() {
