@@ -12,6 +12,10 @@ import './assets/css/glo-color.css'
 import './assets/font_home/iconfont.css'
 // 引入home二级图标
 import './assets/font_second/iconfont.css'
+// 导入tree插件
+import Tree from 'vue-table-with-tree-grid'
+// 引入分类图标
+import './assets/font_category/iconfont.css'
 
 // 添加请求拦截器
 axios.interceptors.request.use(function (config) {
@@ -23,6 +27,7 @@ Vue.prototype.$http = axios
 axios.defaults.baseURL = 'http://127.0.0.1:8888/api/private/v1'
 Vue.config.productionTip = false
 Vue.use(ElementUI)
+Vue.component('tree-table', Tree)
 
 new Vue({
   router,

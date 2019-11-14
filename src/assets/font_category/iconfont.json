@@ -1,0 +1,23 @@
+{
+  "id": "1505371",
+  "name": "正确错误图标",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "7097516",
+      "name": "Icon - 正确-24",
+      "font_class": "Icon-zhengque-",
+      "unicode": "e612",
+      "unicode_decimal": 58898
+    },
+    {
+      "icon_id": "9826657",
+      "name": "错误",
+      "font_class": "cuowu",
+      "unicode": "e613",
+      "unicode_decimal": 58899
+    }
+  ]
+}

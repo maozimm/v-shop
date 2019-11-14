@@ -65,6 +65,27 @@ const modifyRoleReq = function (id, params) {
 const deleteRoleReq = function (id) {
   return axios.delete('/roles/' + id)
 }
+// 获取商品分类列表
+const getCategoriesReq = function (num) {
+  return axios.get('/categories', {
+    params: {
+      pagenum: num,
+      pagesize: 5
+    }
+  })
+}
+// 添加商品分类
+const addCategoriesReq = function (params) {
+  return axios.post('/categories', params)
+}
+// 修改商品分类
+const modifyCategoriesReq = function (id, params) {
+  return axios.put('/categories/' + id, params)
+}
+// 删除商品分类
+const deleteCategoriesReq = function (id) {
+  return axios.delete('/categories/' + id)
+}
 export {
   usersdata,
   statechange,
@@ -80,5 +101,9 @@ export {
   putRoleReq,
   addRoleReq,
   modifyRoleReq,
-  deleteRoleReq
+  deleteRoleReq,
+  getCategoriesReq,
+  addCategoriesReq,
+  modifyCategoriesReq,
+  deleteCategoriesReq
 }
