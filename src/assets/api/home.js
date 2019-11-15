@@ -86,6 +86,36 @@ const modifyCategoriesReq = function (id, params) {
 const deleteCategoriesReq = function (id) {
   return axios.delete('/categories/' + id)
 }
+// 获取参数列表
+const getParamsListReq = function (id, type) {
+  return axios.get(`categories/${id}/attributes`, {
+    params: {
+      sel: type
+    }
+  })
+}
+// 添加参数
+const addParamsReq = function (id, params) {
+  return axios.post(`categories/${id}/attributes`, params)
+}
+// 修改参数
+const modifyParamsReq = function (id1, id2, params) {
+  return axios.put(`categories/${id1}/attributes/${id2}`, params)
+}
+// 删除参数
+const deleteParamsReq = function (id1, id2) {
+  return axios.delete(`categories/${id1}/attributes/${id2}`)
+}
+// 获取商品列表
+const getGoodsReq = function (query, num, size) {
+  return axios.get('goods', {
+    params: {
+      query: query,
+      pagenum: num,
+      pagesize: size
+    }
+  })
+}
 export {
   usersdata,
   statechange,
@@ -105,5 +135,10 @@ export {
   getCategoriesReq,
   addCategoriesReq,
   modifyCategoriesReq,
-  deleteCategoriesReq
+  deleteCategoriesReq,
+  getParamsListReq,
+  addParamsReq,
+  modifyParamsReq,
+  deleteParamsReq,
+  getGoodsReq
 }

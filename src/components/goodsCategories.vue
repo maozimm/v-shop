@@ -34,7 +34,6 @@
         </template>
         <!-- 操作插槽 -->
         <template slot-scope="scope" slot="operate">
-          {{scope.row.cat_id}}
           <el-button
             type="primary"
             icon="el-icon-edit"
@@ -77,6 +76,7 @@
         </el-form-item>
         <el-form-item label="父级分类">
           <div class="block">
+            <!-- 级联选择器 -->
             <el-cascader
               :options="parentCategoriesList"
               v-model="selectedKeys"
