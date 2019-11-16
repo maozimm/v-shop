@@ -2,7 +2,7 @@
   <el-container class="container">
     <el-header class="header"></el-header>
     <el-container class="asdie_main">
-      <el-aside :width="collapse_flag?'56px':'300px'">
+      <el-aside :width="collapse_flag ? '56px' : '300px'">
         <el-button type="info" @click="changecollapse">折叠</el-button>
         <el-menu
           class="el-menu-vertical-demo"
@@ -17,20 +17,24 @@
           :default-active="keepstate"
           :router="true"
         >
-          <el-submenu :index="item.id+''" v-for="item in menus" :key="item.id">
+          <el-submenu
+            :index="item.id + ''"
+            v-for="item in menus"
+            :key="item.id"
+          >
             <template slot="title">
               <i :class="icons[item.id]"></i>
-              <span>{{item.authName}}</span>
+              <span>{{ item.authName }}</span>
             </template>
             <el-menu-item-group>
               <el-menu-item
-                :index="items.path+''"
+                :index="'/' + items.path + ''"
                 v-for="items in item.children"
                 :key="items.id"
-                @click="keepstates(items.path+'')"
+                @click="keepstates('/' + items.path + '')"
               >
                 <i :class="icons[items.id]"></i>
-                {{items.authName}}
+                {{ items.authName }}
               </el-menu-item>
             </el-menu-item-group>
           </el-submenu>

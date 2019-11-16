@@ -6,67 +6,67 @@ const usersdata = function(parmas) {
   })
 }
 // 修改用户状态
-const statechange = function (parmas) {
+const statechange = function(parmas) {
   return axios.put(parmas)
 }
 // 添加用户
-const adduser = function (parmas) {
+const adduser = function(parmas) {
   return axios.post('/users', parmas)
 }
 // 修改用户
-const modifyuser = function (params, data) {
+const modifyuser = function(params, data) {
   return axios.put('/users/' + params, data)
 }
 // 删除用户
-const deleteUser = function (params) {
+const deleteUser = function(params) {
   return axios.delete('/users/' + params)
 }
 // 获取列表权限
-const rigthsList = function (params) {
+const rigthsList = function(params) {
   return axios.get('/rights/' + params)
 }
 // 获取角色列表
-const getRolesList = function () {
+const getRolesList = function() {
   return axios.get('/roles')
 }
 // 删除角色权限
-const deleRolesPower = function (rolesId, powerId) {
+const deleRolesPower = function(rolesId, powerId) {
   return axios.delete(`roles/${rolesId}/rights/${powerId}`)
 }
 // 获取所有权限列表
-const allPower = function (type) {
+const allPower = function(type) {
   return axios.get('/rights/' + type)
 }
 // 根据id获取角色
-const getRoleById = function (id) {
+const getRoleById = function(id) {
   return axios.get('/roles/' + id)
 }
 // 分配权限按钮
-const setPowerbtn = function (id, str) {
+const setPowerbtn = function(id, str) {
   return axios.post(`roles/${id}/rights`, {
     rids: str
   })
 }
 // 分配权限请求
-const putRoleReq = function (userid, roleid) {
+const putRoleReq = function(userid, roleid) {
   return axios.put(`users/${userid}/role`, {
     rid: roleid
   })
 }
 // 添加角色
-const addRoleReq = function (params) {
+const addRoleReq = function(params) {
   return axios.post('/roles', params)
 }
 // 修改角色
-const modifyRoleReq = function (id, params) {
+const modifyRoleReq = function(id, params) {
   return axios.put('roles/' + id, params)
 }
 // 删除角色
-const deleteRoleReq = function (id) {
+const deleteRoleReq = function(id) {
   return axios.delete('/roles/' + id)
 }
 // 获取商品分类列表
-const getCategoriesReq = function (num) {
+const getCategoriesReq = function(num) {
   return axios.get('/categories', {
     params: {
       pagenum: num,
@@ -75,39 +75,41 @@ const getCategoriesReq = function (num) {
   })
 }
 // 添加商品分类
-const addCategoriesReq = function (params) {
+const addCategoriesReq = function(params) {
   return axios.post('/categories', params)
 }
 // 修改商品分类
-const modifyCategoriesReq = function (id, params) {
+const modifyCategoriesReq = function(id, params) {
   return axios.put('/categories/' + id, params)
 }
 // 删除商品分类
-const deleteCategoriesReq = function (id) {
+const deleteCategoriesReq = function(id) {
   return axios.delete('/categories/' + id)
 }
 // 获取参数列表
-const getParamsListReq = function (id, type) {
+const getParamsListReq = function(id, type) {
   return axios.get(`categories/${id}/attributes`, {
     params: {
       sel: type
     }
   })
 }
+// 添加带有vals的参数
+
 // 添加参数
-const addParamsReq = function (id, params) {
+const addParamsReq = function(id, params) {
   return axios.post(`categories/${id}/attributes`, params)
 }
 // 修改参数
-const modifyParamsReq = function (id1, id2, params) {
+const modifyParamsReq = function(id1, id2, params) {
   return axios.put(`categories/${id1}/attributes/${id2}`, params)
 }
 // 删除参数
-const deleteParamsReq = function (id1, id2) {
+const deleteParamsReq = function(id1, id2) {
   return axios.delete(`categories/${id1}/attributes/${id2}`)
 }
 // 获取商品列表
-const getGoodsReq = function (query, num, size) {
+const getGoodsReq = function(query, num, size) {
   return axios.get('goods', {
     params: {
       query: query,

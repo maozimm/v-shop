@@ -6,7 +6,12 @@
       <el-breadcrumb-item>分类参数</el-breadcrumb-item>
     </el-breadcrumb>
     <el-card class="box">
-      <el-alert title="注意：只允许为第三级分类设置相关参数！" type="warning" :closable="false" show-icon></el-alert>
+      <el-alert
+        title="注意：只允许为第三级分类设置相关参数！"
+        type="warning"
+        :closable="false"
+        show-icon
+      ></el-alert>
       <el-row class="choose">
         <el-col>
           <span>选择商品分类：</span>
@@ -23,55 +28,33 @@
       <!-- tab栏 -->
       <el-tabs v-model="activeName" @tab-click="handleClick">
         <el-tab-pane label="动态参数" name="1">
-          <el-button type="primary" class="margin" :disabled="btnFlag" @click="addParamsBtn">添加参数</el-button>
+          <el-button
+            type="primary"
+            class="margin"
+            :disabled="btnFlag"
+            @click="addParamsBtn"
+            >添加参数</el-button
+          >
           <el-table border :data="paramsList">
             <el-table-column type="expand">
               <template slot-scope="scope">
                 <el-tag
-                  v-for="(item,index) in scope.row.attr_vals"
+                  v-for="(item, index) in scope.row.attr_vals"
                   :key="index"
                   class="tagRight"
                   closable
-                >{{item}}</el-tag>
-              </template>
-            </el-table-column>
-            <el-table-column type="index"></el-table-column>
-            <el-table-column label="参数名称" prop="attr_name"></el-table-column>
-            <el-table-column label="操作">
-              <template slot-scope="scope">
-                <el-button
-                  icon="el-icon-edit"
-                  type="primary"
-                  @click="modifyParamsBtn(scope.row.attr_id,scope.row.cat_id)"
-                >修改参数</el-button>
-                <el-button
-                  icon="el-icon-delete"
-                  type="danger"
-                  @click="deleteParamsBtn(scope.row.attr_id,scope.row.cat_id)"
-                >删除参数</el-button>
-              </template>
-            </el-table-column>
-          </el-table>
-        </el-tab-pane>
-        <el-tab-pane label="静态属性" name="2">
-          <el-button type="primary" class="margin" :disabled="btnFlag" @click="addParamsBtn">添加属性</el-button>
-          <el-table border :data="paramsList">
-            <el-table-column type="expand">
-              <template slot-scope="scope">
-                <el-tag
-                  v-for="(item,index) in scope.row.attr_vals"
-                  :key="index"
-                  class="tagRight"
-                  closable
-                >{{item}}</el-tag>
+                  @close="TagClose(scope.row, item)"
+                  >{{ item }}</el-tag
+                >
                 <el-input
                   class="input-new-tag"
                   v-if="scope.row.inputVisible"
                   v-model="scope.row.inputValue"
                   ref="saveTagInput"
                   size="small"
-                  @keyup.enter.native="handleInputConfirm"
-                  @blur="handleInputConfirm"
+                  @keyup.enter.native="handleInputConfirm(scope.row)"
+                  @blur="handleInputConfirm(scope.row)"
+                  v-focus
                 ></el-input>
                 <el-button
                   v-else
@@ -79,23 +62,91 @@
                   ref="TagBtn"
                   size="small"
                   @click="showInput(scope.row)"
-                >+ New Tag</el-button>
+                  >+ New Tag</el-button
+                >
               </template>
             </el-table-column>
             <el-table-column type="index"></el-table-column>
-            <el-table-column label="参数名称" prop="attr_name"></el-table-column>
+            <el-table-column
+              label="参数名称"
+              prop="attr_name"
+            ></el-table-column>
             <el-table-column label="操作">
               <template slot-scope="scope">
                 <el-button
                   icon="el-icon-edit"
                   type="primary"
-                  @click="modifyParamsBtn(scope.row.attr_id,scope.row.cat_id)"
-                >修改属性</el-button>
+                  @click="modifyParamsBtn(scope.row.attr_id, scope.row.cat_id)"
+                  >修改参数</el-button
+                >
                 <el-button
                   icon="el-icon-delete"
                   type="danger"
-                  @click="deleteParamsBtn(scope.row.attr_id,scope.row.cat_id)"
-                >删除属性</el-button>
+                  @click="deleteParamsBtn(scope.row.attr_id, scope.row.cat_id)"
+                  >删除参数</el-button
+                >
+              </template>
+            </el-table-column>
+          </el-table>
+        </el-tab-pane>
+        <el-tab-pane label="静态属性" name="2">
+          <el-button
+            type="primary"
+            class="margin"
+            :disabled="btnFlag"
+            @click="addParamsBtn"
+            >添加属性</el-button
+          >
+          <el-table border :data="paramsList">
+            <el-table-column type="expand">
+              <template slot-scope="scope">
+                <el-tag
+                  v-for="(item, index) in scope.row.attr_vals"
+                  :key="index"
+                  class="tagRight"
+                  closable
+                  @close="TagClose(scope.row, item)"
+                  >{{ item }}</el-tag
+                >
+                <el-input
+                  class="input-new-tag"
+                  v-if="scope.row.inputVisible"
+                  v-model="scope.row.inputValue"
+                  ref="saveTagInput"
+                  size="small"
+                  @keyup.enter.native="handleInputConfirm(scope.row)"
+                  @blur="handleInputConfirm(scope.row)"
+                  v-focus
+                ></el-input>
+                <el-button
+                  v-else
+                  class="button-new-tag"
+                  ref="TagBtn"
+                  size="small"
+                  @click="showInput(scope.row)"
+                  >+ New Tag</el-button
+                >
+              </template>
+            </el-table-column>
+            <el-table-column type="index"></el-table-column>
+            <el-table-column
+              label="参数名称"
+              prop="attr_name"
+            ></el-table-column>
+            <el-table-column label="操作">
+              <template slot-scope="scope">
+                <el-button
+                  icon="el-icon-edit"
+                  type="primary"
+                  @click="modifyParamsBtn(scope.row.attr_id, scope.row.cat_id)"
+                  >修改属性</el-button
+                >
+                <el-button
+                  icon="el-icon-delete"
+                  type="danger"
+                  @click="deleteParamsBtn(scope.row.attr_id, scope.row.cat_id)"
+                  >删除属性</el-button
+                >
               </template>
             </el-table-column>
           </el-table>
@@ -104,13 +155,16 @@
     </el-card>
     <!-- 添加参数对话框 -->
     <el-dialog
-      :title="changeAttr_sel=='many'?'添加参数':'添加属性'"
+      :title="changeAttr_sel == 'many' ? '添加参数' : '添加属性'"
       :visible.sync="dialogVisibleAddParams"
       width="30%"
       @close="addParamsClose"
     >
       <el-form :model="addParmasForm" :rules="rules" ref="addParmasRef">
-        <el-form-item :label="changeAttr_sel=='many'?'参数名称':'属性名称'" prop="attr_name">
+        <el-form-item
+          :label="changeAttr_sel == 'many' ? '参数名称' : '属性名称'"
+          prop="attr_name"
+        >
           <el-input v-model="addParmasForm.attr_name"></el-input>
         </el-form-item>
       </el-form>
@@ -121,13 +175,16 @@
     </el-dialog>
     <!-- 修改对话框 -->
     <el-dialog
-      :title="changeAttr_sel=='many'?'修改参数':'修改属性'"
+      :title="changeAttr_sel == 'many' ? '修改参数' : '修改属性'"
       :visible.sync="dialogVisibleModifyParams"
       width="30%"
       @close="modifyParamsClose"
     >
       <el-form :model="modifyParmasForm" :rules="rules" ref="modifyParmasRef">
-        <el-form-item :label="changeAttr_sel=='many'?'参数名称':'属性名称'" prop="attr_name">
+        <el-form-item
+          :label="changeAttr_sel == 'many' ? '参数名称' : '属性名称'"
+          prop="attr_name"
+        >
           <el-input v-model="modifyParmasForm.attr_name"></el-input>
         </el-form-item>
       </el-form>
@@ -146,6 +203,7 @@ import {
   deleteParamsReq
 } from '../assets/api/home'
 import axios from 'axios'
+
 export default {
   data() {
     return {
@@ -249,12 +307,12 @@ export default {
         this.selectedKeys[this.selectedKeys.length - 1],
         type
       )
-      this.paramsList = res.data
-      this.paramsList.forEach(item => {
+      res.data.forEach(item => {
         item.attr_vals = item.attr_vals ? item.attr_vals.split(',') : []
         item.inputVisible = false
         item.inputValue = ''
       })
+      this.paramsList = res.data
     },
     // 修改按钮
     modifyParamsBtn(id1, id2) {
@@ -314,27 +372,45 @@ export default {
       this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1)
     },
     showInput(row) {
-      console.log(row, 88888)
-      console.log(row.inputVisible)
-      this.inputVisible = true
-      console.log(this.$refs.TagBtn)
-      this.$nextTick(() => {
-        row.inputVisible = true
-        console.log(112222)
-        // this.$refs.saveTagInput.$refs.input.focus()
-      })
+      row.inputVisible = true
     },
-    handleInputConfirm() {
-      let inputValue = this.inputValue
-      if (inputValue) {
-        this.dynamicTags.push(inputValue)
+    async handleInputConfirm(row) {
+      if (row.inputValue.trim().length === 0) {
+        row.inputVisible = false
+        row.inputValue = ''
+        this.$message.error('参数值不能为空')
+      } else {
+        row.attr_vals.push(row.inputValue.trim())
+        await axios.put(`categories/${this.arrtId}/attributes/${row.attr_id}`, {
+          attr_name: row.attr_name,
+          attr_sel: row.attr_sel,
+          attr_vals: row.attr_vals.join(',')
+        })
+        this.$message.success('添加成功')
+        row.inputVisible = false
+        row.inputValue = ''
       }
-      this.inputVisible = 0
-      this.inputValue = ''
+    },
+    // 删除tag参数
+    async TagClose(row, items) {
+      row.attr_vals = row.attr_vals.filter(item => item !== items)
+      await axios.put(`categories/${this.arrtId}/attributes/${row.attr_id}`, {
+        attr_name: row.attr_name,
+        attr_sel: row.attr_sel,
+        attr_vals: row.attr_vals.join(',')
+      })
     }
   },
   created() {
     this.getCategoriesList()
+  },
+  // 自定义让表单聚焦
+  directives: {
+    focus: {
+      inserted(el) {
+        el.children[0].focus()
+      }
+    }
   }
 }
 </script>

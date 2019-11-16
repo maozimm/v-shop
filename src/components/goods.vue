@@ -17,19 +17,39 @@
             clearable
             @clear="getQueryGoods"
           >
-            <el-button slot="append" icon="el-icon-search" @click="getQueryGoods"></el-button>
+            <el-button
+              slot="append"
+              icon="el-icon-search"
+              @click="getQueryGoods"
+            ></el-button>
           </el-input>
         </el-col>
         <el-col :span="4">
-          <el-button type="primary" @click="dialogVisible = true">添加商品</el-button>
+          <el-button type="primary" @click="addGoodsLink">添加商品</el-button>
         </el-col>
       </el-row>
       <el-table border :data="goodsList">
         <el-table-column type="index"></el-table-column>
-        <el-table-column label="商品名称" prop="goods_name" width="800"></el-table-column>
-        <el-table-column label="商品价格(元)" width="150" prop="goods_price"></el-table-column>
-        <el-table-column label="商品重量" width="150" prop="goods_weight"></el-table-column>
-        <el-table-column label="创建时间" prop="add_time"></el-table-column>
+        <el-table-column
+          label="商品名称"
+          prop="goods_name"
+          width="800"
+        ></el-table-column>
+        <el-table-column
+          label="商品价格(元)"
+          width="150"
+          prop="goods_price"
+        ></el-table-column>
+        <el-table-column
+          label="商品重量"
+          width="150"
+          prop="goods_weight"
+        ></el-table-column>
+        <el-table-column label="创建时间" prop="add_time">
+          <template slot-scope="scope">
+            {{ scope.row.add_time | formatTime('YYYY-MM-DD hh:mm:ss') }}
+          </template>
+        </el-table-column>
         <el-table-column label="操作"></el-table-column>
       </el-table>
       <!-- 分页 -->
@@ -38,7 +58,7 @@
           @size-change="handleSizeChange"
           @current-change="handleCurrentChange"
           :current-page="current_page"
-          :page-sizes="[5,10]"
+          :page-sizes="[5, 10]"
           layout="total, sizes, prev, pager, next, jumper"
           :total="total"
         ></el-pagination>
@@ -48,6 +68,7 @@
 </template>
 <script>
 import { getGoodsReq } from '../assets/api/home'
+
 export default {
   data() {
     return {
@@ -66,23 +87,25 @@ export default {
     // 获取商品列表
     async getGoods(query, num, size) {
       const { data: res } = await getGoodsReq(query, num, size)
-      console.log(res.data)
       this.goodsList = res.data.goods
       this.total = res.data.total
-      // }
     },
     handleCurrentChange(val) {
       this.current_page = val
       this.getGoods(this.query, val, this.current_size)
     },
     handleSizeChange(val) {
-      console.log(val)
       this.current_size = val
       this.getGoods(this.query, this.current_page, val)
     },
+    // 商品查询
     getQueryGoods() {
       this.current_page = 1
       this.getGoods(this.query, this.current_page, this.current_size)
+    },
+    // 跳转到添加商品页面
+    addGoodsLink() {
+      this.$router.push('/goods/add')
     }
   },
   created() {

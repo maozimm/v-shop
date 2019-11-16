@@ -16,9 +16,10 @@ import './assets/font_second/iconfont.css'
 import Tree from 'vue-table-with-tree-grid'
 // 引入分类图标
 import './assets/font_category/iconfont.css'
+import moment from 'moment'
 
 // 添加请求拦截器
-axios.interceptors.request.use(function (config) {
+axios.interceptors.request.use(function(config) {
   // 在发送请求之前做些什么
   config.headers.Authorization = window.sessionStorage.getItem('token')
   return config
@@ -28,6 +29,11 @@ axios.defaults.baseURL = 'http://127.0.0.1:8888/api/private/v1'
 Vue.config.productionTip = false
 Vue.use(ElementUI)
 Vue.component('tree-table', Tree)
+// 注册一个全局的过滤器
+Vue.filter('formatTime', function(time, type) {
+  var newTime = moment(new Date(time)).format(type)
+  return newTime
+})
 
 new Vue({
   router,

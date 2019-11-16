@@ -8,6 +8,7 @@ import rigths from '../components/rigths.vue'
 import categories from '../components/goodsCategories.vue'
 import goods from '../components/goods.vue'
 import params from '../components/goodsParams.vue'
+import goodsAdd from '../components/goodsAdd.vue'
 
 Vue.use(VueRouter)
 
@@ -46,6 +47,10 @@ const routes = [
     {
       path: '/goods',
       component: goods
+    },
+    {
+      path: '/goods/add',
+      component: goodsAdd
     }
     ]
   }
